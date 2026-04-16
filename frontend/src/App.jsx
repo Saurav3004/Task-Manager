@@ -1,15 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ProtectedRoute from "./components/ProtectedRoute";
+import "./App.css"
+import PublicRoute from "./components/PublicRoute";
+import Users from "./pages/Users";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <h1 className='bg-red-600'>Hello</h1>
-  )
+    <BrowserRouter>
+      <Routes>
+
+
+        <Route
+          path="/users"
+          element={
+            <ProtectedRoute role="admin">
+              <Users />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+          />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <Register />
+            </PublicRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

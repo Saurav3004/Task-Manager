@@ -3,13 +3,26 @@ import Task from "../models/task.model.js";
 
 // 🔹 CREATE TASK
 export const createTask = async (req, res) => {
-  try {
-    const { title, description, status, priority, dueDate, assignedTo } = req.body;
+  console.log("here");
 
-    const documents = req.files?.map(file => ({
-      fileName: file.originalname,
-      filePath: file.path,
-    })) || [];
+  try {
+    const {
+      title,
+      description,
+      status,
+      priority,
+      dueDate,
+      assignedTo,
+    } = req.body;
+
+    const documents =
+      req.files?.map((file) => ({
+        fileName: file.originalname,
+        filePath: `/uploads/${file.filename}`, // 🔥 fix path also
+      })) || [];
+
+    console.log("documents", documents);
+    console.log("assignedTo raw:", assignedTo);
 
     const task = await Task.create({
       title,
@@ -17,13 +30,19 @@ export const createTask = async (req, res) => {
       status,
       priority,
       dueDate,
-      assignedTo,
+
+      // 🔥 CRITICAL FIX
+      assignedTo: assignedTo && assignedTo !== "" ? assignedTo : null,
+
       createdBy: req.user._id,
       documents,
     });
 
+    console.log("task", task);
+
     res.status(201).json(task);
   } catch (error) {
+    console.error("CREATE TASK ERROR:", error); // 🔥 ADD THIS
     res.status(500).json({ message: error.message });
   }
 };
