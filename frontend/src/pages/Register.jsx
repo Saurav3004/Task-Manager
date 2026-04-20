@@ -69,9 +69,9 @@ function Register() {
 
         <p className="text-center text-sm text-gray-400 mt-6">
           Already have an account?{" "}
-          <a href="/login" className="text-violet-600 hover:underline font-medium">
+          <button onClick={() => navigate("/login")} className="text-violet-600 hover:underline font-medium cursor-pointer">
             Sign in
-          </a>
+          </button>
         </p>
 
       </div>

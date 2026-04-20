@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link, Links } from "react-router-dom";
 import { loginUser } from "../services/authServices";
 import { loginSuccess } from "../redux/authSlice";
 
@@ -72,9 +72,9 @@ function Login() {
 
         <p className="text-center text-sm text-gray-400 mt-6">
           Don't have an account?{" "}
-          <a href="/register" className="text-blue-600 hover:underline font-medium">
+          <button onClick={() => navigate("/register")}  className="text-blue-600 hover:underline font-medium cursor-pointer">
             Register
-          </a>
+          </button>
         </p>
 
       </div>
