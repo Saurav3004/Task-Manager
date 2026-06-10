@@ -1,4 +1,4 @@
-# Task-Manager
+# Task-Manager-Application
 
 Task Manager is a full-stack MERN application that allows users to manage tasks with role-based access control, task assignment, and file attachments. The application is built with a clear separation of frontend and backend, includes API documentation, and supports containerized development.
 
